@@ -10,8 +10,9 @@ contract WavePortal {
     //> Nos ayudamos de esto para generar un número aleatorio.
     uint256 private seed;
 
-    //> Creamos un evento de Solidity
+    //> Creamos eventos para recibirlos desde el FE
     event NewWave(address indexed from, uint256 timestamp, string message);
+    event PrizeWon(address indexed from, uint256 timestamp);
 
     //> Creamos un struct llamado Wave.
     struct Wave {
@@ -49,9 +50,9 @@ contract WavePortal {
     // ademas recompensa al usuario con ETH que se le envia a su cuenta.
     function wave(string memory _message) public {
         //> Impedimos que el usuario envie repetidamente mensajes, sistema anti bots.
-        // Nos aseguramos de que el timestamp actual sea al menos 15 minutos más grande que la última que almacenamos
+        // Nos aseguramos de que el timestamp actual sea al menos 30 segundos más grande que la última que almacenamos
         require(
-            lastWavedAt[msg.sender] + 15 minutes < block.timestamp,
+            lastWavedAt[msg.sender] + 30 seconds < block.timestamp,
             "Wait 15m"
         );
         //> Actualizamos el timestamp actual que tenemos para el usuario
@@ -72,6 +73,8 @@ contract WavePortal {
         //> Da un 50% de probabilidad de que el usuario gane la recompenza en ETH.
         if (seed <= 50) {
             console.log("%s won!", msg.sender);
+            //> Emito un evento PrizeWon cuando el usuario gana.
+            emit PrizeWon(msg.sender, block.timestamp);
             //> Monto de ETH que le vamos a enviar a nuestro usuarios.
             uint256 prizeAmount = 0.0001 ether;
             //> Nos aseguramos de que el saldo del contrato sea ​​mayor que el monto del premio.
@@ -85,7 +88,7 @@ contract WavePortal {
             require(success, "Failed to withdraw money from contract.");
         }
 
-        //> Emito un evento NewWave para recibirlo desde el FE.
+        //> Emito un evento NewWave cuando el usuario guarda un mensaje (para recibirlo desde el FE).
         emit NewWave(msg.sender, block.timestamp, _message);
     }
 
