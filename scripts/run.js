@@ -39,8 +39,11 @@ const main = async () => {
   waveCount = await waveContract.getTotalWaves();
 
   //> llamo a wave() (con mi direccion).
-  let waveTxn = await waveContract.wave("A message!");
+  let waveTxn = await waveContract.wave("my message 1!");
   await waveTxn.wait();
+  //> llamo varias veces con mi direccion, probamos sistema de enfriamiento.
+  // waveTxn = await waveContract.wave("my message 2!");
+  // await waveTxn.wait();
 
   // Obtengo nuevamente el balance de mi contrato para ver que sucede.
   contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
