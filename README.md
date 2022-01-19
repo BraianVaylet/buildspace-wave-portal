@@ -4,6 +4,8 @@
 
 # 🦄 Wave Portal [SmartContract]
 
+### **[VER CONTRATO](https://rinkeby.etherscan.io/address/0xef10AE1B845aEC9251c19cc5af7d4dda7424F52D)**
+
 ### Características del proyecto.
 
 - Proyecto desarrollado para los cursos de la plataforma [buildspace](https://buildspace.so/).
