@@ -1,4 +1,8 @@
-# 🦄 Wave Portal
+<p align="center" width="200">
+   <img align="center" width="100" src="https://raw.githubusercontent.com/BraianVaylet/buildspace-wave-portal-ui/main/public/horn.png" />   
+</p>
+
+# 🦄 Wave Portal [SmartContract]
 
 ### Características del proyecto.
 
